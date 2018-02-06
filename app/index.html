@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MetaCoin - Truffle Webpack Demo w/ Frontend</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="./app.js"></script>
+  <style>
+    .navbar {
+      background: Green;
+    }
+    #inputEnviar {
+      cursor: pointer;
+      background: green;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar navbar-dark box-shadow">
+      <div class="container d-flex justify-content-between">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <strong>Kids and Hope</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <br><br>
+    <h3>Faça sua doação</h3>
+    <hr>
+    <form>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputPais">Pais</label>
+            <input type="email" class="form-control" id="inputPais" placeholder="">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputEstado">Estado</label>
+            <input type="text" class="form-control" id="inputEstado" placeholder="">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputCidade">Cidade</label>
+            <input type="text" class="form-control" id="inputCidade" placeholder="">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="inputNome">Nome</label>
+            <input type="text" class="form-control" id="inputNome" placeholder="">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="inputCPF">CPF</label>
+            <input type="text" class="form-control" id="inputCPF" placeholder="">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input type="email" class="form-control" id="inputEmail" placeholder="">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="inputTelefone">Telefone</label>
+            <input type="text" class="form-control" id="inputTelefone" placeholder="">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="inputValor">Valor da doação</label>
+            <input type="email" class="form-control" id="inputValor" placeholder="">
+          </div>
+        </div>
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="inputEnviar">&nbsp</label>
+            <input type="button" class="form-control" id="inputEnviar" value="enviar">
+          </div>
+        </div>
+      </div>
+     
+    </form>
+
+<!-- 
+    <br><label for="amount">Amount:</label><input type="text" id="amount" placeholder="e.g., 95"></input>
+    <br><label for="receiver">To Address:</label><input type="text" id="receiver" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+    <br><br><button id="send" onclick="App.sendCoin()">Send MetaCoin</button>
+    <br><br>
+    <span id="status"></span>
+    <br>
+       -->
+  </div>
+</body>
+</html>
