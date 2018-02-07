@@ -3,14 +3,16 @@
 <head>
   <title>MetaCoin - Truffle Webpack Demo w/ Frontend</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="./app.js"></script>
   <style>
     .navbar {
       background: Green;
     }
-    #inputEnviar {
+    #inputDoacaoEnviar {
       cursor: pointer;
       background: green;
       color: white;
@@ -30,77 +32,140 @@
       </div>
     </div>
   </header>
+
+
+
   <div class="container">
-    <br><br>
-    <h3>Faça sua doação</h3>
-    <hr>
-    <form>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <label for="inputPais">Pais</label>
-            <input type="email" class="form-control" id="inputPais" placeholder="">
+      <br>
+      <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" href="#doacao" role="tab" data-toggle="tab">Doação</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#transparencia" role="tab" data-toggle="tab">Transparencia</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#cadastro" role="tab" data-toggle="tab">Cadastro Projetos</a>
+          </li>
+        </ul>
+        
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane fade in active" id="doacao">
+            <br><br>
+            Total Doado <span id="totalDoado"></span>
+            <br><br>
+            <h3>Faça sua doação</h3>
+            <hr>
+            <form>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="inputDoacaoPais">Pais</label>
+                    <input type="text" class="form-control" id="inputDoacaoPais" placeholder="">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="inputDoacaoEstado">Estado</label>
+                    <input type="text" class="form-control" id="inputDoacaoEstado" placeholder="">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="inputDoacaoCidade">Cidade</label>
+                    <input type="text" class="form-control" id="inputDoacaoCidade" placeholder="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputDoacaoNome">Nome</label>
+                    <input type="text" class="form-control" id="inputDoacaoNome" placeholder="">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputDoacaoCPF">CPF</label>
+                    <input type="text" class="form-control" id="inputDoacaoCPF" placeholder="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputDoacaoEmail">Email</label>
+                    <input type="email" class="form-control" id="inputDoacaoEmail" placeholder="">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputDoacaoTelefone">Telefone</label>
+                    <input type="text" class="form-control" id="inputDoacaoTelefone" placeholder="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="inputDoacaoValor">Valor da doação</label>
+                    <input type="text" class="form-control" id="inputDoacaoValor" placeholder="">
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="inputDoacaoEnviar">&nbsp</label>
+                    <input type="button" class="form-control" id="inputDoacaoEnviar" onclick="App.sendDonation()" value="enviar">
+                  </div>
+                </div>
+              </div>
+              
+            </form>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="transparencia">
+
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="cadastro">
+              <br><br>
+              <h3>Cadastro de instituição</h3>
+              <hr>
+              <form>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="inputCadastroNone">Nome da institução</label>
+                      <input type="email" class="form-control" id="inputCadastroNome" placeholder="">
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="inputCadastroCarteira">Carteira</label>
+                      <input type="text" class="form-control" id="inputCadastroCarteira" placeholder="">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputCadastroOrcamento">Orçamento</label>
+                      <input type="text" class="form-control" id="inputCadastroOrcamento" placeholder="">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputCadastroPlano">Plano de contas</label>
+                      <input type="text" class="form-control" id="inputCadastroPlano" placeholder="">
+                    </div>
+                  </div>
+                </div>
+                
+              </form>
           </div>
         </div>
-        <div class="col-sm-4">
-          <div class="form-group">
-            <label for="inputEstado">Estado</label>
-            <input type="text" class="form-control" id="inputEstado" placeholder="">
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="form-group">
-            <label for="inputCidade">Cidade</label>
-            <input type="text" class="form-control" id="inputCidade" placeholder="">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="inputNome">Nome</label>
-            <input type="text" class="form-control" id="inputNome" placeholder="">
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="inputCPF">CPF</label>
-            <input type="text" class="form-control" id="inputCPF" placeholder="">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="inputEmail">Email</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="">
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="inputTelefone">Telefone</label>
-            <input type="text" class="form-control" id="inputTelefone" placeholder="">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="inputValor">Valor da doação</label>
-            <input type="email" class="form-control" id="inputValor" placeholder="">
-          </div>
-        </div>
-        <div class="col-sm-3">
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            <label for="inputEnviar">&nbsp</label>
-            <input type="button" class="form-control" id="inputEnviar" value="enviar">
-          </div>
-        </div>
-      </div>
-     
-    </form>
+    
 
 <!-- 
     <br><label for="amount">Amount:</label><input type="text" id="amount" placeholder="e.g., 95"></input>
@@ -110,6 +175,7 @@
     <span id="status"></span>
     <br>
        -->
+  <span id="status"></span>
   </div>
 </body>
 </html>

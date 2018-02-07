@@ -6,10 +6,10 @@ import { default as Web3} from 'web3';
 import { default as contract } from 'truffle-contract'
 
 // Import our contract artifacts and turn them into usable abstractions.
-import metacoin_artifacts from '../../build/contracts/MetaCoin.json'
+import kidhope_artifacts from '../../build/contracts/KidHope.json'
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
-var MetaCoin = contract(metacoin_artifacts);
+var KidHope = contract(kidhope_artifacts);
 
 // The following code is simple to show off interacting with your contracts.
 // As your needs grow you will likely need to change its form and structure.
@@ -22,7 +22,7 @@ window.App = {
     var self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
-    MetaCoin.setProvider(web3.currentProvider);
+    KidHope.setProvider(web3.currentProvider);
 
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function(err, accs) {
@@ -35,11 +35,42 @@ window.App = {
         alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
         return;
       }
-
+      console.log(accs)
       accounts = accs;
       account = accounts[0];
 
-      self.refreshBalance();
+      self.totalDonations();
+    });
+  },
+
+  sendDonation: function() {
+    var inputDoacao = {
+      inputDoacaoPais: $('#inputDoacaoPais').val(),
+      inputDoacaoPais: $('#inputDoacaoPais').val(),
+      inputDoacaoEstado: $('#inputDoacaoEstado').val(),
+      inputDoacaoCidade: $('#inputDoacaoCidade').val(),
+      inputDoacaoNome: $('#inputDoacaoNome').val(),
+      inputDoacaoCPF: $('#inputDoacaoCPF').val(),
+      inputDoacaoEmail: $('#inputDoacaoEmail').val(),
+      inputDoacaoTelefone: $('#inputDoacaoTelefone').val(),
+      inputDoacaoValor: parseInt($('#inputDoacaoValor').val())
+    }
+    
+
+    var self = this;
+
+    this.setStatus("Initiating transaction... (please wait)");
+
+    var meta;
+    KidHope.deployed().then(function(instance) {
+      meta = instance;
+      return meta.contribute({from: account, value:web3.toWei(inputDoacao.inputDoacaoValor, "ether")});
+    }).then(function() {
+      self.setStatus("Transaction complete!");
+      self.totalDonations();
+    }).catch(function(e) {
+      console.log(e);
+      self.setStatus("Error sending coin; see log.");
     });
   },
 
@@ -48,41 +79,57 @@ window.App = {
     status.innerHTML = message;
   },
 
-  refreshBalance: function() {
+  totalDonations: function() {
     var self = this;
 
     var meta;
-    MetaCoin.deployed().then(function(instance) {
+    KidHope.deployed().then(function(instance) {
       meta = instance;
-      return meta.getBalance.call(account, {from: account});
+      return meta.getTotalDonated.call({from: account});
     }).then(function(value) {
-      var balance_element = document.getElementById("balance");
-      balance_element.innerHTML = value.valueOf();
+      var totalDoado = document.getElementById("totalDoado");
+      console.log("totalDoado",value.valueOf());
+      totalDoado.innerHTML = value.valueOf()/1000000000000000000.0;
     }).catch(function(e) {
       console.log(e);
-      self.setStatus("Error getting balance; see log.");
     });
   },
 
+  refreshBalance: function() {
+    // var self = this;
+
+    // var meta;
+    // KidHope.deployed().then(function(instance) {
+    //   meta = instance;
+    //   return meta.getBalance.call(account, {from: account});
+    // }).then(function(value) {
+    //   var balance_element = document.getElementById("balance");
+    //   balance_element.innerHTML = value.valueOf();
+    // }).catch(function(e) {
+    //   console.log(e);
+    //   self.setStatus("Error getting balance; see log.");
+    // });
+  },
+
   sendCoin: function() {
-    var self = this;
+    // var self = this;
 
-    var amount = parseInt(document.getElementById("amount").value);
-    var receiver = document.getElementById("receiver").value;
+    // var amount = parseInt(document.getElementById("amount").value);
+    // var receiver = document.getElementById("receiver").value;
 
-    this.setStatus("Initiating transaction... (please wait)");
+    // this.setStatus("Initiating transaction... (please wait)");
 
-    var meta;
-    MetaCoin.deployed().then(function(instance) {
-      meta = instance;
-      return meta.sendCoin(receiver, amount, {from: account});
-    }).then(function() {
-      self.setStatus("Transaction complete!");
-      self.refreshBalance();
-    }).catch(function(e) {
-      console.log(e);
-      self.setStatus("Error sending coin; see log.");
-    });
+    // var meta;
+    // KidHope.deployed().then(function(instance) {
+    //   meta = instance;
+    //   return meta.sendCoin(receiver, amount, {from: account});
+    // }).then(function() {
+    //   self.setStatus("Transaction complete!");
+    //   self.refreshBalance();
+    // }).catch(function(e) {
+    //   console.log(e);
+    //   self.setStatus("Error sending coin; see log.");
+    // });
   }
 };
 
@@ -100,3 +147,10 @@ window.addEventListener('load', function() {
 
   App.start();
 });
+
+var inputCadastro = {
+  inputCadastroNone :$('#inputCadastroNone').val(),
+  inputCadastroCarteira :$('#inputCadastroCarteira').val(),
+  inputCadastroOrcamento :$('#inputCadastroOrcamento').val(),
+  inputCadastroPlano :$('#inputCadastroPlano').val()
+}
